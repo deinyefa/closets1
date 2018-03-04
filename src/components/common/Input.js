@@ -29,12 +29,14 @@ const Input = ({
 const styles = {
   inputStyle: {
     color: '#000',
-    fontSize: 18,
-    lineHeight: 23
+    fontSize: 16,
+    lineHeight: 23,
+    paddingBottom: 10
   },
   labelStyle: {
-    fontSize: 12,
-    flex: 1
+    fontSize: 11,
+    flex: 1,
+    marginBottom: -4
   },
   containerStyle: {
     height: 40,

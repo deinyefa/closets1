@@ -1,35 +1,59 @@
 import React, { Component } from 'react';
 import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import firebase from 'firebase';
 
-import { Button, Input, CardSection } from './common';
+import { Button, Input } from './common';
 
-const SignInForm = ({ signUpButton, registerToggle, forgotPassword }) => {
-  return (
-    <View style={styles.formContainerStyles}>
-      <TouchableOpacity
-        onPress={(registerToggle = 'true')}
-        style={styles.registerStyles}
-      >
-        <Text>Register</Text>
-      </TouchableOpacity>
+class SignInForm extends Component {
+  state = { email: '', password: '' };
 
-      <View style={styles.formStyles}>
-        <Text style={styles.appNameStyles}>App Name</Text>
-        <View>
-          <Input placeholder="email@example.com" label="email" />
-          <Input placeholder="password" label="password" />
-        </View>
-        <Button onPress={signUpButton}>SIGN IN</Button>
+  forgotPassword() {
+    return Alert.alert('user forgot password');
+  }
+  signInButton() {
+    const { email, password } = this.state;
+    firebase.auth.signInWithEmailAndPassword(email, password);
+  }
+
+  render() {
+    return (
+      <View style={styles.formContainerStyles}>
         <TouchableOpacity
-          onPress={forgotPassword}
-          style={styles.forgotPasswordStyles}
+          onPress={() => this.setState({ registerToggle: 'true' })}
+          style={styles.registerStyles}
         >
-          <Text>Forgot Password?</Text>
+          <Text>Register</Text>
         </TouchableOpacity>
+
+        <View style={styles.formStyles}>
+          <Text style={styles.appNameStyles}>App Name</Text>
+          <View>
+            <Input
+              placeholder="email@gmail.com"
+              label="email"
+              value={this.state.email}
+              onChangeText={email => this.setState({ email })}
+            />
+            <Input
+              secureTextEntry={true}
+              placeholder="password"
+              label="password"
+              value={this.state.password}
+              onChangeText={password => this.setState({ password })}
+            />
+          </View>
+          <Button onPress={() => this.signInButton.bind(this)}>SIGN IN</Button>
+          <TouchableOpacity
+            onPress={this.forgotPassword}
+            style={styles.forgotPasswordStyles}
+          >
+            <Text>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
 
 const styles = {
   formContainerStyles: {
@@ -37,8 +61,7 @@ const styles = {
     alignItems: 'center',
     borderColor: '#EE6A60',
     borderWidth: 3,
-    borderRadius: 2,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)'
+    borderRadius: 2
   },
   registerStyles: {
     alignSelf: 'flex-start',

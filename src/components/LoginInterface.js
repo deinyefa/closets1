@@ -9,32 +9,11 @@ class LoginInterface extends Component {
     registerToggle: 'false'
   };
 
-  forgotPassword() {
-    return Alert.alert('user forgot password');
-  }
-  signUpButton() {
-    return Alert.alert('user submitted form');
-  }
-  registerForm() {
-    return Alert.alert('user wants to register');
-  }
-
   renderCorrectForm() {
-    if (this.state.registerToggle) {
-      return (
-        <SignUpForm
-          registerToggle={this.state.registerToggle}
-          signUpButton={this.state.signUpButton}
-        />
-      );
+    if (this.state.registerToggle === 'true') {
+      return <SignUpForm />;
     }
-    return (
-      <SignInForm
-        registerForm={this.state.registerForm}
-        signUpButton={this.state.signUpButton}
-        forgotPassword={this.state.forgotPassword}
-      />
-    );
+    return <SignInForm />;
   }
 
   render() {
@@ -43,7 +22,6 @@ class LoginInterface extends Component {
         source={require('../assets/login-background.jpg')}
         style={styles.backgroundImage}
       >
-        <SignUpForm />
         {this.renderCorrectForm()}
       </ImageBackground>
     );

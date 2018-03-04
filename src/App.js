@@ -10,7 +10,8 @@ class App extends Component {
     loggedIn: false
   };
 
-  componentWillMount() {
+  /**
+   *componentWillMount() {
     firebase.initializeApp({
       apiKey: 'AIzaSyCp3X2csZ-eOrpaZwdWRhYv2SrpxqhKDr8',
       authDomain: 'closet1-dev.firebaseapp.com',
@@ -27,11 +28,14 @@ class App extends Component {
       }
     });
   }
-
+   */
 
   // the default case will be the loading screen image! With a black person!
   render() {
-    switch (this.state.loggedIn) {
+    return <MyCloset />;
+
+    /**
+     *switch (this.state.loggedIn) {
       case true:
         return <MyCloset />;
       case false:
@@ -39,6 +43,7 @@ class App extends Component {
       default:
         return <Spinner size="large" />;
     }
+     */
   }
 }
 

@@ -20,13 +20,13 @@ const Footer = props => {
 
 const styles = {
   containerStyles: {
-    fontSize: 18,
     paddingTop: 20,
     paddingBottom: 20,
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'baseline'
+    alignItems: 'flex-end',
+    backgroundColor: '#BFBFBF'
   }
 };
 

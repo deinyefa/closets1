@@ -31,7 +31,7 @@ class SignInForm extends Component {
         this.setState({
           signInError:
             'Oops! That email and password combination does not match our records.',
-          loading: true
+          loading: false
         });
       });
   }

@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
 import firebase from 'firebase';
 
-import { Button, Input } from './common';
+import { Button, Input, Spinner } from './common';
 
 class SignUpForm extends Component {
-  state = { email: '', password: '', signUpError: '' };
+  state = { email: '', password: '', signUpError: '', loading: false };
+
+  renderSignUpButton() {
+    if (this.state.loading) {
+      return <Spinner size="small" />;
+    }
+    return <Button onPress={() => this.signUp.bind(this)}>REGISTER</Button>;
+  }
 
   signUp() {
     const { email, password } = this.state;
@@ -15,7 +22,10 @@ class SignUpForm extends Component {
       .createUserWithEmailAndPassword(email, password)
       .then(this.onSignUpSuccess.bind(this))
       .catch(() =>
-        this.setState({ signUpError: 'Sorry, that email is already in use!' })
+        this.setState({
+          signUpError: 'Sorry, that email is already in use!',
+          loading: false
+        })
       );
   }
   onSignUpSuccess() {
@@ -53,7 +63,9 @@ class SignUpForm extends Component {
               onChangeText={password => this.setState({ password })}
             />
           </View>
-          <Button onPress={() => this.signUp.bind(this)}>REGISTER</Button>
+
+          {this.renderSignUpButton()}
+          
           <Text>I agree to App Name Terms of Use</Text>
           <Text>Subscribe to our newsletter</Text>
         </View>

@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
-import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import React from 'react';
+import {
+  TouchableOpacity,
+  Input,
+  Button,
+  Text,
+  View,
+  Switch
+} from 'react-native';
 
-import { Button, Input, CardSection } from './common';
-
-const SignInForm = ({ signUpButton, registerToggle, forgotPassword }) => {
+const SignUpForm = ({ registerToggle, signUpButton }) => {
   return (
     <View style={styles.formContainerStyles}>
       <TouchableOpacity
-        onPress={(registerToggle = 'true')}
+        onPress={(registerToggle = 'false')}
         style={styles.registerStyles}
       >
-        <Text>Register</Text>
+        <Text>Log In</Text>
       </TouchableOpacity>
 
       <View style={styles.formStyles}>
@@ -19,13 +24,13 @@ const SignInForm = ({ signUpButton, registerToggle, forgotPassword }) => {
           <Input placeholder="email@example.com" label="email" />
           <Input placeholder="password" label="password" />
         </View>
-        <Button onPress={signUpButton}>SIGN IN</Button>
-        <TouchableOpacity
-          onPress={forgotPassword}
+        <Button onPress={signUpButton}>REGISTER</Button>
+        {/* <TouchableOpacity
+          onPress={this.forgotPassword}
           style={styles.forgotPasswordStyles}
-        >
-          <Text>Forgot Password?</Text>
-        </TouchableOpacity>
+        > */}
+        <Switch>Forgot Password?</Switch>
+        {/* </TouchableOpacity> */}
       </View>
     </View>
   );
@@ -62,4 +67,4 @@ const styles = {
   }
 };
 
-export default SignInForm;
+export default SignUpForm;

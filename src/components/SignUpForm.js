@@ -1,16 +1,35 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
+import firebase from 'firebase';
 
 import { Button, Input } from './common';
 
 class SignUpForm extends Component {
-  state = { email: '', password: '' };
+  state = { email: '', password: '', signUpError: '' };
+
+  signUp() {
+    const { email, password } = this.state;
+    this.setState({ signUpError: '' });
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(this.onSignUpSuccess.bind(this))
+      .catch(() =>
+        this.setState({ signUpError: 'Sorry, that email is already in use!' })
+      );
+  }
+  onSignUpSuccess() {
+    this.setState({ email: '', password: '', signInError: '', loading: false });
+  }
+  login() {
+    return Alert.alert('user wants to login');
+  }
 
   render() {
     return (
       <View style={styles.formContainerStyles}>
         <TouchableOpacity
-          onPress={() => this.setState({ registerToggle: 'false' })}
+          onPress={this.login.bind(this)}
           style={styles.registerStyles}
         >
           <Text>Log In</Text>
@@ -18,6 +37,7 @@ class SignUpForm extends Component {
 
         <View style={styles.formStyles}>
           <Text style={styles.appNameStyles}>App Name</Text>
+          <Text>{this.state.signUpErrorStyle}</Text>
           <View>
             <Input
               placeholder="email@gmail.com"
@@ -33,7 +53,7 @@ class SignUpForm extends Component {
               onChangeText={password => this.setState({ password })}
             />
           </View>
-          <Button onPress={() => this.signUpButton.bind(this)}>REGISTER</Button>
+          <Button onPress={() => this.signUp.bind(this)}>REGISTER</Button>
           <Text>I agree to App Name Terms of Use</Text>
           <Text>Subscribe to our newsletter</Text>
         </View>
@@ -63,6 +83,10 @@ const styles = {
     fontSize: 32,
     marginBottom: 30,
     textAlign: 'center'
+  },
+  signUpErrorStyle: {
+    color: 'red',
+    fontSize: 16
   }
 };
 

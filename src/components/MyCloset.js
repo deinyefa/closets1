@@ -5,7 +5,7 @@ import { Footer } from './common';
 
 const MyCloset = () => {
   return (
-    <View>
+    <View style={styles.closetContainer}>
       <View style={styles.headerContainer}>
         <View style={styles.imageContainer}>
           <Image />
@@ -48,6 +48,8 @@ const MyCloset = () => {
 };
 
 const styles = {
+  closetContainer: {
+  },
   headerContainer: {
     flexDirection: 'row',
     paddingTop: 20,

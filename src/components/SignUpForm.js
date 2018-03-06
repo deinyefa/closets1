@@ -11,7 +11,7 @@ class SignUpForm extends Component {
     if (this.state.loading) {
       return <Spinner size="small" />;
     }
-    return <Button onPress={() => this.signUp.bind(this)}>REGISTER</Button>;
+    return <Button onPress={this.signUp.bind(this)}>REGISTER</Button>;
   }
 
   signUp() {
@@ -31,15 +31,12 @@ class SignUpForm extends Component {
   onSignUpSuccess() {
     this.setState({ email: '', password: '', signInError: '', loading: false });
   }
-  login() {
-    return Alert.alert('user wants to login');
-  }
 
   render() {
     return (
       <View style={styles.formContainerStyles}>
         <TouchableOpacity
-          onPress={this.login.bind(this)}
+          onPress={this.props.toggleAuthPages}
           style={styles.registerStyles}
         >
           <Text>Log In</Text>

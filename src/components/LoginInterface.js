@@ -6,14 +6,18 @@ import SignUpForm from './SignUpForm';
 
 class LoginInterface extends Component {
   state = {
-    registerToggle: 'false'
+    registerToggle: false
   };
 
+  toggleAuthPages() {
+    this.setState({ registerToggle: !this.state.registerToggle });
+  }
+
   renderCorrectForm() {
-    if (this.state.registerToggle === 'true') {
-      return <SignUpForm />;
+    if (this.state.registerToggle) {
+      return <SignUpForm toggleAuthPages={this.toggleAuthPages.bind(this)} />;
     }
-    return <SignInForm />;
+    return <SignInForm toggleAuthPages={this.toggleAuthPages.bind(this)} />;
   }
 
   render() {

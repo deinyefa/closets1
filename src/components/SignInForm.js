@@ -10,21 +10,18 @@ class SignInForm extends Component {
   forgotPassword() {
     return Alert.alert('user forgot password');
   }
-  register() {
-    return Alert.alert('user wants to register');
-  }
   renderSignInButton() {
     if (this.state.loading) {
       return <Spinner size="small" />;
     }
     return (
-      <Button onPress={() => this.signInButton.bind(this)}>SIGN IN</Button>
+      <Button onPress={this.signInButton.bind(this)}>SIGN IN</Button>
     );
   }
   signInButton() {
     const { email, password } = this.state;
     this.setState({ signInError: '', loading: true });
-    firebase.auth
+    firebase.auth()
       .signInWithEmailAndPassword(email, password)
       .then(this.onLogInSuccess.bind(this))
       .catch(() => {
@@ -43,16 +40,13 @@ class SignInForm extends Component {
   render() {
     return (
       <View style={styles.formContainerStyles}>
-        <TouchableOpacity
-          onPress={() => this.register}
-          style={styles.registerStyles}
-        >
+        <TouchableOpacity onPress={this.props.toggleAuthPages} style={styles.registerStyles}>
           <Text>Register</Text>
         </TouchableOpacity>
 
         <View style={styles.formStyles}>
           <Text style={styles.appNameStyles}>App Name</Text>
-          <Text>{this.state.signInErrorStyle}</Text>
+          <Text style={styles.signInErrorStyle}>{this.state.signInError}</Text>
           <View>
             <Input
               placeholder="email@gmail.com"

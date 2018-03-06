@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import firebase from 'firebase';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
 import LoginInterface from './components/LoginInterface';
 import MyCloset from './components/MyCloset';
 import { Spinner } from './components/common';
+import reducers from './reducers';
 
 class App extends Component {
   state = {
     loggedIn: false
   };
 
-  /**
-   *componentWillMount() {
+  
+  // TODO: refactor into env file and gitignore it
+  componentWillMount() {
     firebase.initializeApp({
       apiKey: 'AIzaSyCp3X2csZ-eOrpaZwdWRhYv2SrpxqhKDr8',
       authDomain: 'closet1-dev.firebaseapp.com',
@@ -28,14 +33,20 @@ class App extends Component {
       }
     });
   }
-   */
+   
 
   // the default case will be the loading screen image! With a black person!
   render() {
-    return <MyCloset />;
+    // return (
+    //   <Provider store={createStore(reducers)}>
+    //     <View>
+    //       <MyCloset />
+    //     </View>
+    //   </Provider>
+    // );
 
-    /**
-     *switch (this.state.loggedIn) {
+    
+     switch (this.state.loggedIn) {
       case true:
         return <MyCloset />;
       case false:
@@ -43,7 +54,7 @@ class App extends Component {
       default:
         return <Spinner size="large" />;
     }
-     */
+     
   }
 }
 

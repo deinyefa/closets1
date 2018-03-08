@@ -48,8 +48,7 @@ const MyCloset = () => {
 };
 
 const styles = {
-  closetContainer: {
-  },
+  closetContainer: {},
   headerContainer: {
     flexDirection: 'row',
     paddingTop: 20,
@@ -70,7 +69,8 @@ const styles = {
   },
   statsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around',
+    alignItems: 'stretch'
   },
   statsText: {
     flexDirection: 'column'

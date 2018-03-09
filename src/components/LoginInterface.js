@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
 import { ImageBackground, View, Text } from 'react-native';
+import { connect } from 'react-redux';
 
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 class LoginInterface extends Component {
-  state = {
-    registerToggle: false
-  };
-
-  toggleAuthPages() {
-    this.setState({ registerToggle: !this.state.registerToggle });
-  }
-
   renderCorrectForm() {
-    if (this.state.registerToggle) {
-      return <SignUpForm toggleAuthPages={this.toggleAuthPages.bind(this)} />;
+    if (this.props.toggleAuthPages) {
+      return <SignUpForm />;
     }
-    return <SignInForm toggleAuthPages={this.toggleAuthPages.bind(this)} />;
+    return <SignInForm />;
   }
 
   render() {
@@ -43,4 +36,10 @@ const styles = {
   }
 };
 
-export default LoginInterface;
+mapStateToProps = state => {
+  return {
+    toggleAuthPages: state.toggleAuthPages
+  };
+};
+
+export default connect(mapStateToProps)(LoginInterface);

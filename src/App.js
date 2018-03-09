@@ -14,38 +14,35 @@ class App extends Component {
   //   loggedIn: false
   // };
 
-  
   // TODO: refactor into env file and gitignore it
-  // componentWillMount() {
-  //   firebase.initializeApp({
-  //     apiKey: 'AIzaSyCp3X2csZ-eOrpaZwdWRhYv2SrpxqhKDr8',
-  //     authDomain: 'closet1-dev.firebaseapp.com',
-  //     databaseURL: 'https://closet1-dev.firebaseio.com',
-  //     projectId: 'closet1-dev',
-  //     storageBucket: 'closet1-dev.appspot.com',
-  //     messagingSenderId: '88443996439'
-  //   });
-  //   firebase.auth().onAuthStateChanged(user => {
-  //     if (user) {
-  //       this.setState({ loggedIn: true });
-  //     } else {
-  //       this.setState({ loggedIn: false });
-  //     }
-  //   });
-  // }
-   
+  componentWillMount() {
+    firebase.initializeApp({
+      apiKey: 'AIzaSyCp3X2csZ-eOrpaZwdWRhYv2SrpxqhKDr8',
+      authDomain: 'closet1-dev.firebaseapp.com',
+      databaseURL: 'https://closet1-dev.firebaseio.com',
+      projectId: 'closet1-dev',
+      storageBucket: 'closet1-dev.appspot.com',
+      messagingSenderId: '88443996439'
+    });
+    // firebase.auth().onAuthStateChanged(user => {
+    //   if (user) {
+    //     this.setState({ loggedIn: true });
+    //   } else {
+    //     this.setState({ loggedIn: false });
+    //   }
+    // });
+  }
 
   // the default case will be the loading screen image! With a black person!
   render() {
     return (
       <Provider store={createStore(reducers)}>
         <View>
-          <MyCloset />
+          <LoginInterface />
         </View>
       </Provider>
     );
 
-    
     //  switch (this.state.loggedIn) {
     //   case true:
     //     return <MyCloset />;
@@ -53,9 +50,7 @@ class App extends Component {
     //     return <LoginInterface />;
     //   default:
     //     return <Spinner size="large" />;
-    }
-     
   }
-
+}
 
 export default App;

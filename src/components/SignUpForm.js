@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
+import { connect } from 'react-redux';
+import { emailChanged, passwordChanged, registerToggle } from '../actions';
 import firebase from 'firebase';
 
 import { Button, Input, Spinner } from './common';
@@ -32,11 +34,19 @@ class SignUpForm extends Component {
     this.setState({ email: '', password: '', signInError: '', loading: false });
   }
 
+  onEmailChange(text) {
+    this.props.emailChanged(text);
+  }
+
+  onPasswordChange(text) {
+    this.props.passwordChanged(text);
+  }
+
   render() {
     return (
       <View style={styles.formContainerStyles}>
         <TouchableOpacity
-          onPress={this.props.toggleAuthPages}
+          onPress={this.props.registerToggle}
           style={styles.registerStyles}
         >
           <Text>Log In</Text>
@@ -49,20 +59,20 @@ class SignUpForm extends Component {
             <Input
               placeholder="email@gmail.com"
               label="email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
+              value={this.props.email}
+              onChangeText={this.onEmailChange.bind(this)}
             />
             <Input
               secureTextEntry={true}
               placeholder="password"
               label="password"
               value={this.state.password}
-              onChangeText={password => this.setState({ password })}
+              onChangeText={this.onPasswordChange.bind(this)}
             />
           </View>
 
           {this.renderSignUpButton()}
-          
+
           <Text>I agree to App Name Terms of Use</Text>
           <Text>Subscribe to our newsletter</Text>
         </View>
@@ -99,4 +109,15 @@ const styles = {
   }
 };
 
-export default SignUpForm;
+const mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password
+  };
+};
+
+export default connect(mapStateToProps, {
+  emailChanged,
+  passwordChanged,
+  registerToggle
+})(SignUpForm);

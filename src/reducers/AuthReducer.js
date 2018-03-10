@@ -8,18 +8,17 @@ import {
   SIGNUP_USER_SUCCESS,
   LOGIN_USER
 } from '../actions/types';
+import firebase from 'firebase';
 
 const INITIAL_STATE = {
   email: '',
   password: '',
-  user: null,
   showSignUpForm: true,
   error: '',
   loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(state);
   switch (action.type) {
     case EMAIL_CHANGED:
       return { ...state, email: action.payload };
@@ -52,7 +51,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_USER_FAIL:
       return {
         ...state,
-        error: 'Authentication Failed. Please try again.',
+        error: 'Failed to Log In. Please try again.',
         password: '',
         loading: false
       };
@@ -70,7 +69,7 @@ export default (state = INITIAL_STATE, action) => {
     case SIGNUP_USER_FAIL:
       return {
         ...state,
-        error: 'Authentication Failed. Please try again.',
+        error: 'Failed to Register. Please try again',
         email: '',
         password: '',
         loading: false

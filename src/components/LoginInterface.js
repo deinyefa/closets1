@@ -7,7 +7,7 @@ import SignUpForm from './SignUpForm';
 
 class LoginInterface extends Component {
   renderCorrectForm() {
-    if (this.props.toggleAuthPages) {
+    if (this.props.showSignUpForm) {
       return <SignUpForm />;
     }
     return <SignInForm />;
@@ -38,7 +38,7 @@ const styles = {
 
 mapStateToProps = state => {
   return {
-    toggleAuthPages: state.toggleAuthPages
+    showSignUpForm: state.auth.showSignUpForm
   };
 };
 

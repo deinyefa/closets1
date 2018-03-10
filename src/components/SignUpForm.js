@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
 import { connect } from 'react-redux';
-import { emailChanged, passwordChanged, registerToggle } from '../actions';
+import {
+  emailChanged,
+  passwordChanged,
+  registerToggle,
+  signUpUser
+} from '../actions';
 import firebase from 'firebase';
 
 import { Button, Input, Spinner } from './common';
@@ -9,11 +14,17 @@ import { Button, Input, Spinner } from './common';
 class SignUpForm extends Component {
   state = { email: '', password: '', signUpError: '', loading: false };
 
+  onButtonPress() {
+    const { email, password } = this.props;
+
+    this.props.signUpUser({ email, password });
+  }
+
   renderSignUpButton() {
     if (this.state.loading) {
       return <Spinner size="small" />;
     }
-    return <Button onPress={this.signUp.bind(this)}>REGISTER</Button>;
+    return <Button onPress={this.onButtonPress.bind(this)}>REGISTER</Button>;
   }
 
   signUp() {
@@ -54,7 +65,7 @@ class SignUpForm extends Component {
 
         <View style={styles.formStyles}>
           <Text style={styles.appNameStyles}>App Name</Text>
-          <Text>{this.state.signUpErrorStyle}</Text>
+          <Text style={styles.signUpErrorStyle}>{this.state.signUpError}</Text>
           <View>
             <Input
               placeholder="email@gmail.com"
@@ -119,5 +130,6 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   emailChanged,
   passwordChanged,
-  registerToggle
+  registerToggle,
+  signUpUser
 })(SignUpForm);

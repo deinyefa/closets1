@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 import firebase from 'firebase';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
 
 import LoginInterface from './components/LoginInterface';
 import MyCloset from './components/MyCloset';
@@ -35,11 +35,10 @@ class App extends Component {
 
   // the default case will be the loading screen image! With a black person!
   render() {
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
     return (
-      <Provider store={createStore(reducers)}>
-        <View>
-          <LoginInterface />
-        </View>
+      <Provider store={store}>
+        <LoginInterface />
       </Provider>
     );
 

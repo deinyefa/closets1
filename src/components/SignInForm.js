@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import {
+  registerToggle,
+  emailChanged,
+  passwordChanged,
+  loginUser
+} from '../actions';
 import firebase from 'firebase';
 
 import { Button, Input, Spinner } from './common';
@@ -14,14 +21,18 @@ class SignInForm extends Component {
     if (this.state.loading) {
       return <Spinner size="small" />;
     }
-    return (
-      <Button onPress={this.signInButton.bind(this)}>SIGN IN</Button>
-    );
+    return <Button onPress={this.onButtonPress.bind(this)}>SIGN IN</Button>;
+  }
+  onButtonPress() {
+    const { email, password } = this.props;
+
+    this.props.loginUser({ email, password });
   }
   signInButton() {
     const { email, password } = this.state;
     this.setState({ signInError: '', loading: true });
-    firebase.auth()
+    firebase
+      .auth()
       .signInWithEmailAndPassword(email, password)
       .then(this.onLogInSuccess.bind(this))
       .catch(() => {
@@ -40,7 +51,10 @@ class SignInForm extends Component {
   render() {
     return (
       <View style={styles.formContainerStyles}>
-        <TouchableOpacity onPress={this.props.toggleAuthPages} style={styles.registerStyles}>
+        <TouchableOpacity
+          onPress={this.props.registerToggle}
+          style={styles.registerStyles}
+        >
           <Text>Register</Text>
         </TouchableOpacity>
 
@@ -51,15 +65,15 @@ class SignInForm extends Component {
             <Input
               placeholder="email@gmail.com"
               label="email"
-              value={this.state.email}
-              onChangeText={email => this.setState({ email })}
+              value={this.props.email}
+              onChangeText={text => this.props.emailChanged(text)}
             />
             <Input
               secureTextEntry={true}
               placeholder="password"
               label="password"
-              value={this.state.password}
-              onChangeText={password => this.setState({ password })}
+              value={this.props.password}
+              onChangeText={text => this.props.passwordChanged(text)}
             />
           </View>
 
@@ -95,7 +109,8 @@ const styles = {
   },
   appNameStyles: {
     fontSize: 32,
-    marginBottom: 30
+    marginBottom: 30,
+    textAlign: 'center'
   },
   forgotPasswordStyles: {
     alignSelf: 'center',
@@ -107,4 +122,16 @@ const styles = {
   }
 };
 
-export default SignInForm;
+mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    password: state.auth.password
+  };
+};
+
+export default connect(null, {
+  registerToggle,
+  emailChanged,
+  passwordChanged,
+  loginUser
+})(SignInForm);

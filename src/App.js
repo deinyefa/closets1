@@ -5,7 +5,6 @@ import { createStore, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 
 import LoginInterface from './components/LoginInterface';
-import MyCloset from './components/MyCloset';
 import { Spinner } from './components/common';
 import reducers from './reducers';
 

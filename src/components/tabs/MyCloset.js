@@ -69,18 +69,21 @@ const styles = {
   statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    backgroundColor: 'pink'
   },
   statsText: {
     flexDirection: 'column'
   },
   businessContainer: {
     flexDirection: 'row',
-    paddingTop: 10
+    paddingTop: 10,
+    backgroundColor: 'pink'
   },
   settingsContainer: {
     flexDirection: 'row',
-    paddingTop: 10
+    paddingTop: 10,
+    backgroundColor: 'pink'
   },
   editProfile: {
     paddingLeft: 10,

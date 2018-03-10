@@ -4,12 +4,8 @@ import { Text, View } from 'react-native';
 class BagScreen extends Component {
   render() {
     return (
-      <View>
-        <Text
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
-          Bag Screen!
-        </Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Bag Screen!</Text>
       </View>
     );
   }

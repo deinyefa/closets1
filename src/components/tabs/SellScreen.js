@@ -4,12 +4,8 @@ import { Text, View } from 'react-native';
 class SellScreen extends Component {
   render() {
     return (
-      <View>
-        <Text
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
-          Sell Screen!
-        </Text>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Sell Screen!</Text>
       </View>
     );
   }

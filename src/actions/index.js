@@ -1,3 +1,5 @@
+// TODO: make auth flow more robust
+
 import {
   EMAIL_CHANGED,
   PASSWORD_CHANGED,
@@ -5,7 +7,8 @@ import {
   LOGIN_USER_SUCCESS,
   SIGNUP_USER_SUCCESS,
   LOGIN_USER_FAIL,
-  SIGNUP_USER_FAIL
+  SIGNUP_USER_FAIL,
+  LOGIN_USER
 } from './types';
 import firebase from 'firebase';
 
@@ -32,26 +35,30 @@ export const registerToggle = () => {
 // async request with redux thunk
 export const loginUser = ({ email, password }) => {
   return dispatch => {
+    dispatch({ type: LOGIN_USER });
     firebase
       .auth()
-      .signInWithEmailAndPassword()
+      .signInWithEmailAndPassword(email, password)
       .then(user => {
         dispatch({ type: LOGIN_USER_SUCCESS, payload: user });
       })
-      .catch(() => {
+      .catch(error => {
+        console.log(error);
         dispatch({ type: LOGIN_USER_FAIL });
       });
   };
 };
 export const signUpUser = ({ email, password }) => {
   return dispatch => {
+    dispatch({ type: LOGIN_USER });
     firebase
       .auth()
-      .createUserWithEmailAndPassword()
+      .createUserWithEmailAndPassword(email, password)
       .then(user => {
         dispatch({ type: SIGNUP_USER_SUCCESS, payload: user });
       })
-      .then(() => {
+      .catch(error => {
+        console.log(error);
         dispatch({ type: SIGNUP_USER_FAIL });
       });
   };

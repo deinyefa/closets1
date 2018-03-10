@@ -18,6 +18,7 @@ class LoginInterface extends Component {
       <ImageBackground
         source={require('../assets/login-background.jpg')}
         style={styles.backgroundImage}
+        blurRadius={30}
       >
         {this.renderCorrectForm()}
       </ImageBackground>

@@ -12,8 +12,6 @@ import firebase from 'firebase';
 import { Button, Input, Spinner } from './common';
 
 class SignUpForm extends Component {
-  state = { email: '', password: '', signUpError: '', loading: false };
-
   onButtonPress() {
     const { email, password } = this.props;
 
@@ -21,36 +19,24 @@ class SignUpForm extends Component {
   }
 
   renderSignUpButton() {
-    if (this.state.loading) {
-      return <Spinner size="small" />;
+    if (this.props.loading) {
+      return <Spinner size="large" />;
     }
     return <Button onPress={this.onButtonPress.bind(this)}>REGISTER</Button>;
   }
 
-  signUp() {
-    const { email, password } = this.state;
-    this.setState({ signUpError: '' });
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(this.onSignUpSuccess.bind(this))
-      .catch(() =>
-        this.setState({
-          signUpError: 'Sorry, that email is already in use!',
-          loading: false
-        })
-      );
-  }
-  onSignUpSuccess() {
-    this.setState({ email: '', password: '', signInError: '', loading: false });
-  }
-
-  onEmailChange(text) {
+  onEmailChanged(text) {
     this.props.emailChanged(text);
   }
 
-  onPasswordChange(text) {
+  onPasswordChanged(text) {
     this.props.passwordChanged(text);
+  }
+
+  renderError() {
+    if (this.props.error) {
+      return <Text style={styles.signUpErrorStyle}>{this.props.error}</Text>;
+    }
   }
 
   render() {
@@ -65,22 +51,25 @@ class SignUpForm extends Component {
 
         <View style={styles.formStyles}>
           <Text style={styles.appNameStyles}>App Name</Text>
-          <Text style={styles.signUpErrorStyle}>{this.state.signUpError}</Text>
+          {this.renderError()}
           <View>
             <Input
               placeholder="email@gmail.com"
               label="email"
               value={this.props.email}
-              onChangeText={this.onEmailChange.bind(this)}
+              onChangeText={this.onEmailChanged.bind(this)}
             />
             <Input
               secureTextEntry={true}
               placeholder="password"
               label="password"
-              value={this.state.password}
-              onChangeText={this.onPasswordChange.bind(this)}
+              value={this.props.password}
+              onChangeText={this.onPasswordChanged.bind(this)}
             />
           </View>
+          <Text style={{ color: 'grey' }}>
+            Password must be at least 6 characters!
+          </Text>
 
           {this.renderSignUpButton()}
 
@@ -99,7 +88,6 @@ const styles = {
     borderColor: '#EE6A60',
     borderWidth: 3,
     borderRadius: 2
-    // backgroundColor: 'rgba(255, 255, 255, 0.9)'
   },
   registerStyles: {
     alignSelf: 'flex-start',
@@ -123,7 +111,9 @@ const styles = {
 const mapStateToProps = state => {
   return {
     email: state.auth.email,
-    password: state.auth.password
+    password: state.auth.password,
+    error: state.auth.error,
+    loading: state.auth.loading
   };
 };
 

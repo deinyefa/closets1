@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Icon } from 'react-native-elements';
-import { TabNavigator, TabBarBottom } from 'react-navigation';
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 import {
   ExploreScreen,
   InspirationScreen,
@@ -8,6 +8,7 @@ import {
   BagScreen,
   MyCloset
 } from '../components/tabs';
+import Settings from '../components/subscreens/Settings';
 
 export const Tabs = TabNavigator(
   {
@@ -16,7 +17,7 @@ export const Tabs = TabNavigator(
     Sell: { screen: SellScreen },
     Bag: { screen: BagScreen },
     MyCloset: { screen: MyCloset }
-  },
+  }
   // {
   //   navigationOptions: ({ navigation }) => ({
   //     tabBarIcon: ({ tintColor }) => {
@@ -52,3 +53,25 @@ export const Tabs = TabNavigator(
   //   swipeEnabled: false
   // }
 );
+
+export const SettingsStack = StackNavigator({
+  Settings: {
+    screen: Settings,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Settings'
+    })
+  }
+});
+
+export const Root = StackNavigator(
+  {
+    Tabs: { screen: Tabs },
+    Settings: { screen: SettingsStack }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'none'
+  }
+);
+
+

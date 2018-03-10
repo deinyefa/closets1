@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 class MyCloset extends Component {
   render() {
@@ -28,19 +28,30 @@ class MyCloset extends Component {
             </View>
             <View style={styles.businessContainer}>
               {/* will add icons to these with <Image /> */}
-              <Text>Orders</Text>
-              <Text>Offers</Text>
-              <Text>Chat</Text>
+              <TouchableOpacity>
+                <Text>Orders</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text>Offers</Text>
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Text>Chat</Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.settingsContainer}>
-              <View style={styles.editProfile}>
-                {/* or follow/following */}
-                <Text>Edit Profile</Text>
-              </View>
-              <Text style={styles.settingsButton}>Settings</Text>
+              {/* or follow/following */}
+              <TouchableOpacity style={styles.editProfile}>
+                <Text style={styles.editButton}>Edit Profile</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate('Settings')}
+              >
+                <Text style={styles.settingsButton}>Settings</Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
+        <Text>Closet STUFF</Text>
       </View>
     );
   }
@@ -54,7 +65,8 @@ const styles = {
     paddingBottom: 20,
     paddingLeft: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#d6d7da'
+    borderBottomColor: '#d6d7da',
+    backgroundColor: '#f1f2ee'
   },
   imageContainer: {
     flex: 2
@@ -62,43 +74,44 @@ const styles = {
   infoContainer: {
     flex: 3,
     paddingLeft: 10,
-    paddingRight: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
+    paddingRight: 10
   },
   statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'stretch',
-    backgroundColor: 'pink'
+    flexDirection: 'row'
   },
   statsText: {
-    flexDirection: 'column'
+    flexDirection: 'column',
+    flex: 1,
+    alignItems: 'center'
   },
   businessContainer: {
     flexDirection: 'row',
     paddingTop: 10,
-    backgroundColor: 'pink'
+    justifyContent: 'space-around'
   },
   settingsContainer: {
     flexDirection: 'row',
-    paddingTop: 10,
-    backgroundColor: 'pink'
+    paddingTop: 10
   },
   editProfile: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    // flex: 3,
+    paddingLeft: 5,
+    paddingRight: 5,
+    flex: 1,
     alignSelf: 'center',
+    justifyContent: 'space-around',
     borderWidth: 1,
-    borderRadius: 5,
     borderColor: '#d6d7da'
   },
+  editButton: {
+    textAlign: 'center',
+    paddingTop: 5,
+    paddingBottom: 5
+  },
   settingsButton: {
-    // flex: 1,
     alignSelf: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
     borderWidth: 1,
-    borderRadius: 5,
     borderColor: '#d6d7da'
   }
 };

@@ -6,7 +6,7 @@ import firebase from 'firebase';
 
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import { Tabs } from '../config/router';
+import { Root } from '../config/router';
 import { Spinner } from './common';
 
 let userLoggedIn;
@@ -31,7 +31,7 @@ class LoginInterface extends Component {
   }
 
   render() {
-    return <Tabs />;
+    return <Root />;
 
     // switch (userLoggedIn) {
     //   case true:

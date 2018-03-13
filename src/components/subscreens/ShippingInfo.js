@@ -44,4 +44,4 @@ const ShippingInfo = () => {
   );
 };
 
-export default ShippingInfo;
+export { ShippingInfo };

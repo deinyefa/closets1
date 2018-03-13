@@ -44,4 +44,4 @@ const ReturnPolicy = () => {
   );
 };
 
-export default ReturnPolicy;
+export { ReturnPolicy };

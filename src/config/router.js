@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Icon } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation';
 import {
   ExploreScreen,
@@ -8,7 +8,16 @@ import {
   BagScreen,
   MyCloset
 } from '../components/tabs';
-import Settings from '../components/subscreens/Settings';
+import {
+  Settings,
+  ChangeCurrency,
+  ChangePassword,
+  Feedback,
+  PrivacyTerms,
+  ReturnPolicy,
+  ShippingInfo,
+  About
+} from '../components/subscreens';
 
 export const Tabs = TabNavigator(
   {
@@ -17,41 +26,47 @@ export const Tabs = TabNavigator(
     Sell: { screen: SellScreen },
     Bag: { screen: BagScreen },
     MyCloset: { screen: MyCloset }
+  },
+  {
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        let type;
+        switch (routeName) {
+          case 'Explore':
+            iconName = 'home';
+            type = 'feather';
+            break;
+          case 'Inspiration':
+            iconName = 'search';
+            type = 'feather';
+            break;
+          case 'Sell':
+            iconName = 'plus';
+            type = 'font-awesome';
+            break;
+          case 'Bag':
+            iconName = 'bag';
+            type = 'simple-line-icon';
+            break;
+          case 'MyCloset':
+            iconName = 'user';
+            type = 'feather';
+            break;
+        }
+        return <Icon name={iconName} size={20} color={tintColor} type={type} />;
+      }
+    }),
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      activeTintColor: 'tomato',
+      inactiveTintColor: 'gray'
+    },
+    animationEnabled: false,
+    swipeEnabled: false
   }
-  // {
-  //   navigationOptions: ({ navigation }) => ({
-  //     tabBarIcon: ({ tintColor }) => {
-  //       const { routeName } = navigation.state;
-  //       let iconName;
-  //       switch (routeName) {
-  //         case 'Explore':
-  //           iconName = 'md-home';
-  //           break;
-  //         case 'Inspiration':
-  //           iconName = 'ios-search-outline';
-  //           break;
-  //         case 'Sell':
-  //           iconName = 'ios-add-outline';
-  //           break;
-  //         case 'Bag':
-  //           iconName = 'bag';
-  //           break;
-  //         case 'MyCloset':
-  //           iconName = 'user';
-  //           break;
-  //       }
-  //       return <Icon name={iconName} size={25} color={tintColor} />;
-  //     }
-  //   }),
-  //   tabBarComponent: TabBarBottom,
-  //   tabBarPosition: 'bottom',
-  //   tabBarOptions: {
-  //     activeTintColor: 'tomato',
-  //     inactiveTintColor: 'gray'
-  //   },
-  //   animationEnabled: false,
-  //   swipeEnabled: false
-  // }
 );
 
 export const SettingsStack = StackNavigator({
@@ -59,6 +74,48 @@ export const SettingsStack = StackNavigator({
     screen: Settings,
     navigationOptions: ({ navigation }) => ({
       title: 'Settings'
+    })
+  },
+  ChangeCurrency: {
+    screen: ChangeCurrency,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Change Currency'
+    })
+  },
+  ChangePassword: {
+    screen: ChangePassword,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Change Password'
+    })
+  },
+  About: {
+    screen: About,
+    navigationOptions: ({ navigation }) => ({
+      title: 'About'
+    })
+  },
+  Feedback: {
+    screen: Feedback,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Feedback'
+    })
+  },
+  PrivacyTerms: {
+    screen: PrivacyTerms,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Terms and Privacy'
+    })
+  },
+  ReturnPolicy: {
+    screen: ReturnPolicy,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Return Policy'
+    })
+  },
+  ShippingInfo: {
+    screen: ShippingInfo,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Shipping Info'
     })
   }
 });
@@ -73,5 +130,3 @@ export const Root = StackNavigator(
     headerMode: 'none'
   }
 );
-
-

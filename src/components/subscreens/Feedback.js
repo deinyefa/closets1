@@ -16,4 +16,4 @@ const Feedback = () => {
   );
 };
 
-export default Feedback;
+export { Feedback };

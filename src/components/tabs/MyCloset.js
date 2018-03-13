@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 class MyCloset extends Component {
   render() {
@@ -15,26 +16,33 @@ class MyCloset extends Component {
             <View style={styles.statsContainer}>
               <View style={styles.statsText}>
                 <Text>#</Text>
-                <Text>posts</Text>
+                <Text style={{ fontSize: 13 }}>posts</Text>
               </View>
               <View style={styles.statsText}>
                 <Text>#</Text>
-                <Text>followers</Text>
+                <Text style={{ fontSize: 13 }}>followers</Text>
               </View>
               <View style={styles.statsText}>
                 <Text>#</Text>
-                <Text>following</Text>
+                <Text style={{ fontSize: 13 }}>following</Text>
               </View>
             </View>
             <View style={styles.businessContainer}>
               {/* will add icons to these with <Image /> */}
               <TouchableOpacity>
+                <Icon
+                  name="receipt"
+                  type="material-community"
+                  color="#F61200"
+                />
                 <Text>Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity>
+                <Icon name="tags" type="font-awesome" color="#F61200" size={26} />
                 <Text>Offers</Text>
               </TouchableOpacity>
               <TouchableOpacity>
+                <Icon name="chat" type="entypo" color="#F61200" />
                 <Text>Chat</Text>
               </TouchableOpacity>
             </View>
@@ -44,9 +52,15 @@ class MyCloset extends Component {
                 <Text style={styles.editButton}>Edit Profile</Text>
               </TouchableOpacity>
               <TouchableOpacity
+                style={styles.settingsButton}
                 onPress={() => this.props.navigation.navigate('Settings')}
               >
-                <Text style={styles.settingsButton}>Settings</Text>
+                <Icon
+                  name="settings"
+                  type="feather"
+                  size={26}
+                  color="#F61200"
+                />
               </TouchableOpacity>
             </View>
           </View>
@@ -61,7 +75,7 @@ const styles = {
   closetContainer: {},
   headerContainer: {
     flexDirection: 'row',
-    paddingTop: 20,
+    paddingTop: 40,
     paddingBottom: 20,
     paddingLeft: 20,
     borderBottomWidth: 1,
@@ -73,8 +87,8 @@ const styles = {
   },
   infoContainer: {
     flex: 3,
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingLeft: 20,
+    paddingRight: 20
   },
   statsContainer: {
     flexDirection: 'row'
@@ -109,10 +123,7 @@ const styles = {
   },
   settingsButton: {
     alignSelf: 'center',
-    paddingTop: 5,
-    paddingBottom: 5,
-    borderWidth: 1,
-    borderColor: '#d6d7da'
+    paddingLeft: 5
   }
 };
 

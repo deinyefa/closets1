@@ -10,4 +10,4 @@ const ChangeCurrency = () => {
   );
 };
 
-export default ChangeCurrency;
+export {ChangeCurrency};

@@ -44,4 +44,4 @@ const PrivacyTerms = () => {
   );
 };
 
-export default PrivacyTerms;
+export { PrivacyTerms };

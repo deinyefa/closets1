@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
 
 class Settings extends Component {
@@ -45,16 +45,20 @@ class Settings extends Component {
           />
         </List>
         <List>
-          <View style={styles.signOutContainerStyles}>
-            <Text
-              style={styles.signOutStyles}
-              onPress={() => console.log('sign out')}
-            >
-              SIGN OUT
-            </Text>
-          </View>
+          <TouchableOpacity
+            style={styles.signOutContainerStyles}
+            onPress={() => console.log('sign out')}
+          >
+            <Text style={styles.signOutStyles}>SIGN OUT</Text>
+          </TouchableOpacity>
           <Text
-            style={{ fontSize: 14, alignSelf: 'center', paddingBottom: 40 }}
+            style={{
+              fontSize: 14,
+              alignSelf: 'center',
+              paddingBottom: 40,
+              flex: 1,
+              borderTopWidth: 2
+            }}
           >
             v1.0.0
           </Text>
@@ -74,9 +78,7 @@ const styles = {
   signOutContainerStyles: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: '#7f7f7f'
+    alignItems: 'center'
   },
   signOutStyles: {
     fontSize: 22,

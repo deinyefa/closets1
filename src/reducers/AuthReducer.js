@@ -6,7 +6,11 @@ import {
   SIGNUP_USER_FAIL,
   LOGIN_USER_SUCCESS,
   SIGNUP_USER_SUCCESS,
-  LOGIN_USER
+  LOGIN_USER,
+  UPDATE_PASSWORD_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
+  PASSWORD_MISMATCH,
+  UPDATE_PASSWORD
 } from '../actions/types';
 import firebase from 'firebase';
 
@@ -73,6 +77,33 @@ export default (state = INITIAL_STATE, action) => {
         email: '',
         password: '',
         loading: false
+      };
+
+    case UPDATE_PASSWORD:
+      console.log(action.payload.prop);
+      return {
+        ...state,
+        [action.payload.prop]: action.payload.value
+      };
+
+    case UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        newPassword: action.payload.newPassword,
+        confirmPassword: action.payload.confirmPassword
+      };
+
+    case UPDATE_PASSWORD_FAIL:
+      return {
+        ...state,
+        error:
+          'Something went wrong or please enter at least 6 characters and please try again.'
+      };
+
+    case PASSWORD_MISMATCH:
+      return {
+        ...state,
+        error: 'The entered passwords do not match, please try again'
       };
 
     default:

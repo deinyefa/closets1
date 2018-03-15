@@ -8,7 +8,10 @@ class MyCloset extends Component {
       <View style={styles.closetContainer}>
         <View style={styles.headerContainer}>
           <View style={styles.imageContainer}>
-            <Image />
+            <Image
+              source={require('../../assets/default-dp.png')}
+              style={styles.profilePictureStyles}
+            />
             <Text>Display Name (handle)</Text>
             <Text>Headline (bio)</Text>
           </View>
@@ -38,7 +41,12 @@ class MyCloset extends Component {
                 <Text>Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity>
-                <Icon name="tags" type="font-awesome" color="#F61200" size={26} />
+                <Icon
+                  name="tags"
+                  type="font-awesome"
+                  color="#F61200"
+                  size={26}
+                />
                 <Text>Offers</Text>
               </TouchableOpacity>
               <TouchableOpacity>
@@ -84,6 +92,11 @@ const styles = {
   },
   imageContainer: {
     flex: 2
+  },
+  profilePictureStyles: {
+    borderRadius: 50,
+    width: 100,
+    height: 100
   },
   infoContainer: {
     flex: 3,

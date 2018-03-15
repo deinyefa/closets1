@@ -57,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
     case LOGIN_USER_FAIL:
       return {
         ...state,
-        error: 'Failed to Log In. Please try again.',
+        error: action.payload,
         password: '',
         loading: false
       };
@@ -75,7 +75,7 @@ export default (state = INITIAL_STATE, action) => {
     case SIGNUP_USER_FAIL:
       return {
         ...state,
-        error: 'Failed to Register. Please try again',
+        error: action.payload,
         email: '',
         password: '',
         loading: false

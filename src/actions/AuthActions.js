@@ -77,7 +77,7 @@ export const loginUser = ({ email, password }) => {
       })
       .catch(error => {
         console.log(error);
-        dispatch({ type: LOGIN_USER_FAIL });
+        dispatch({ type: LOGIN_USER_FAIL, payload: error.message });
       });
   };
 };
@@ -92,7 +92,7 @@ export const signUpUser = ({ email, password }) => {
       })
       .catch(error => {
         console.log(error);
-        dispatch({ type: SIGNUP_USER_FAIL });
+        dispatch({ type: SIGNUP_USER_FAIL, payload: error.message });
       });
   };
 };
@@ -110,11 +110,10 @@ export const logout = () => {
 export const isUserSignedIn = () => {
   return dispatch => {
     firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        console.log(user);
-        dispatch({ type: AUTHENTICATE_CURRENT_USER, payload: user });
-      }
-      return;
+      setTimeout(
+        () => dispatch({ type: AUTHENTICATE_CURRENT_USER, payload: user }),
+        5000
+      );
     });
   };
 };

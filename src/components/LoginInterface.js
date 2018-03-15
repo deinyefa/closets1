@@ -12,7 +12,7 @@ import { Spinner } from './common';
 
 class LoginInterface extends Component {
   componentWillMount() {
-    this.props.isUserSignedIn;
+    this.props.isUserSignedIn();
   }
 
   renderCorrectForm() {
@@ -23,24 +23,38 @@ class LoginInterface extends Component {
   }
 
   render() {
-    // return <Root />;
-
-    switch (this.props.user) {
-      case true:
-        return <Root />;
-      case false:
-        return (
-          <ImageBackground
-            source={require('../assets/login-background.jpg')}
-            style={styles.backgroundImage}
-            blurRadius={30}
-          >
-            {this.renderCorrectForm()}
-          </ImageBackground>
-        );
-      default:
-        return <Spinner size="large" />;
+    if (this.props.user) {
+      return <Root />;
+    } else if (this.props.user === null) {
+      return (
+        <ImageBackground
+          source={require('../assets/login-background.jpg')}
+          style={styles.backgroundImage}
+          blurRadius={30}
+        >
+          {this.renderCorrectForm()}
+        </ImageBackground>
+      );
+    } else {
+      return <Spinner size="large" />;
     }
+
+    // switch (this.props.user !== null) {
+    //   case true:
+    //     return <Root />;
+    //   case false:
+    //     return (
+    //       <ImageBackground
+    //         source={require('../assets/login-background.jpg')}
+    //         style={styles.backgroundImage}
+    //         blurRadius={30}
+    //       >
+    //         {this.renderCorrectForm()}
+    //       </ImageBackground>
+    //     );
+    //   default:
+    //     return <Spinner size="large" />;
+    // }
   }
 }
 

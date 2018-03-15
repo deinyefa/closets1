@@ -12,7 +12,9 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAIL,
   PASSWORD_MISMATCH,
-  UPDATE_PASSWORD
+  UPDATE_PASSWORD,
+  LOGOUT,
+  AUTHENTICATE_CURRENT_USER
 } from './types';
 import firebase from 'firebase';
 
@@ -92,5 +94,27 @@ export const signUpUser = ({ email, password }) => {
         console.log(error);
         dispatch({ type: SIGNUP_USER_FAIL });
       });
+  };
+};
+
+export const logout = () => {
+  return dispatch => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => console.log(user))
+      .catch(error => console.log(error));
+  };
+};
+
+export const isUserSignedIn = () => {
+  return dispatch => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user);
+        dispatch({ type: AUTHENTICATE_CURRENT_USER, payload: user });
+      }
+      return;
+    });
   };
 };

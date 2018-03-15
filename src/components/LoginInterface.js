@@ -2,25 +2,17 @@ import React, { Component } from 'react';
 import { ImageBackground, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
-// import { loggedIn } from '../actions';
+
+import { isUserSignedIn } from '../actions';
 
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 import { Root } from '../config/router';
 import { Spinner } from './common';
 
-let userLoggedIn;
-
 class LoginInterface extends Component {
   componentWillMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        userLoggedIn = true;
-      } else {
-        userLoggedIn = false;
-      }
-    });
-    console.log(userLoggedIn);
+    this.props.isUserSignedIn;
   }
 
   renderCorrectForm() {
@@ -31,24 +23,24 @@ class LoginInterface extends Component {
   }
 
   render() {
-    return <Root />;
+    // return <Root />;
 
-    // switch (userLoggedIn) {
-    //   case true:
-    //     return <MyCloset />;
-    //   case false:
-    //     return (
-    //       <ImageBackground
-    //         source={require('../assets/login-background.jpg')}
-    //         style={styles.backgroundImage}
-    //         blurRadius={30}
-    //       >
-    //         {this.renderCorrectForm()}
-    //       </ImageBackground>
-    //     );
-    //   default:
-    //     return <Spinner size="large" />;
-    // }
+    switch (this.props.user) {
+      case true:
+        return <Root />;
+      case false:
+        return (
+          <ImageBackground
+            source={require('../assets/login-background.jpg')}
+            style={styles.backgroundImage}
+            blurRadius={30}
+          >
+            {this.renderCorrectForm()}
+          </ImageBackground>
+        );
+      default:
+        return <Spinner size="large" />;
+    }
   }
 }
 
@@ -65,8 +57,9 @@ const styles = {
 
 mapStateToProps = state => {
   return {
-    showSignUpForm: state.auth.showSignUpForm
+    showSignUpForm: state.auth.showSignUpForm,
+    user: state.auth.user
   };
 };
 
-export default connect(mapStateToProps)(LoginInterface);
+export default connect(mapStateToProps, { isUserSignedIn })(LoginInterface);

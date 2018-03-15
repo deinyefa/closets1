@@ -142,8 +142,4 @@ const styles = {
 
 export { MyCloset };
 
-// logging user out.
-/*
-import firebase from 'firebase';
-<Button onPress={() => firebase.auth().signOut()}></Button>
-*/
+

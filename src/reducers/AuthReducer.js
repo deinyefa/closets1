@@ -10,7 +10,9 @@ import {
   UPDATE_PASSWORD_SUCCESS,
   UPDATE_PASSWORD_FAIL,
   PASSWORD_MISMATCH,
-  UPDATE_PASSWORD
+  UPDATE_PASSWORD,
+  LOGOUT,
+  AUTHENTICATE_CURRENT_USER
 } from '../actions/types';
 import firebase from 'firebase';
 
@@ -105,6 +107,9 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         error: 'The entered passwords do not match, please try again'
       };
+
+    case AUTHENTICATE_CURRENT_USER:
+      return { ...state, user: action.payload };
 
     default:
       return state;

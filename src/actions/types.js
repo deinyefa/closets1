@@ -11,3 +11,5 @@ export const LOGIN_USER_FAIL = 'login_user_fail';
 export const LOGIN_USER = 'login_user';
 export const SIGNUP_USER_SUCCESS = 'signup_user_success';
 export const SIGNUP_USER_FAIL = 'sign_up_user_fail';
+export const LOGOUT = 'user_logout';
+export const AUTHENTICATE_CURRENT_USER = 'authenticate_current_user';

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { logout } from '../../actions';
 
-class Settings extends Component {
+class NewSettings extends Component {
   render() {
     return (
       <ScrollView>
@@ -45,12 +47,14 @@ class Settings extends Component {
           />
         </List>
         <List>
-          <TouchableOpacity
-            style={styles.signOutContainerStyles}
-            onPress={() => console.log('sign out')}
-          >
-            <Text style={styles.signOutStyles}>SIGN OUT</Text>
-          </TouchableOpacity>
+          <View style={{ borderBottomWidth: 2, borderBottomColor: '#979291' }}>
+            <TouchableOpacity
+              style={styles.signOutContainerStyles}
+              onPress={this.props.logout}
+            >
+              <Text style={styles.signOutStyles}>SIGN OUT</Text>
+            </TouchableOpacity>
+          </View>
           <Text
             style={{
               fontSize: 14,
@@ -89,4 +93,5 @@ const styles = {
   }
 };
 
-export { Settings };
+// export { Settings };
+export const Settings = connect(null, { logout })(NewSettings);

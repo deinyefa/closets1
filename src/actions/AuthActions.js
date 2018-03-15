@@ -32,7 +32,7 @@ export const passwordChanged = text => {
   };
 };
 
-export const updatePassword = (prop, value) => {
+export const updatePassword = ({ prop, value }) => {
   return {
     type: UPDATE_PASSWORD,
     payload: { prop, value }
@@ -46,13 +46,15 @@ export const firebasePasswordUpdate = ({ newPassword, confirmPassword }) => {
       user
         .updatePassword(newPassword)
         .then(() => {
+          console.log('password has been updated, it is now ' + newPassword);
           dispatch({
             type: UPDATE_PASSWORD_SUCCESS,
             payload: { newPassword, confirmPassword }
           });
         })
-        .catch(() => {
-          dispatch({ type: UPDATE_PASSWORD_FAIL });
+        .catch(error => {
+          console.log(error);
+          dispatch({ type: UPDATE_PASSWORD_FAIL, payload: error.message });
         });
     };
   }
@@ -99,11 +101,8 @@ export const signUpUser = ({ email, password }) => {
 
 export const logout = () => {
   return dispatch => {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => console.log(user))
-      .catch(error => console.log(error));
+    dispatch({ type: AUTHENTICATE_CURRENT_USER, payload: null });
+    firebase.auth().signOut();
   };
 };
 
@@ -112,7 +111,7 @@ export const isUserSignedIn = () => {
     firebase.auth().onAuthStateChanged(user => {
       setTimeout(
         () => dispatch({ type: AUTHENTICATE_CURRENT_USER, payload: user }),
-        5000
+        3000
       );
     });
   };

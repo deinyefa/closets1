@@ -82,24 +82,27 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case UPDATE_PASSWORD:
-      console.log(action.payload.prop);
       return {
         ...state,
-        [action.payload.prop]: action.payload.value
+        [action.payload.prop]: action.payload.value,
+        error: ''
       };
 
     case UPDATE_PASSWORD_SUCCESS:
       return {
         ...state,
-        newPassword: action.payload.newPassword,
-        confirmPassword: action.payload.confirmPassword
+        newPassword: '',
+        confirmPassword:'',
+        successMessage: 'Your password has been successfully updated!',
+        error: ''
       };
 
     case UPDATE_PASSWORD_FAIL:
       return {
         ...state,
-        error:
-          'Something went wrong or please enter at least 6 characters and please try again.'
+        error: action.payload,
+        newPassword: '',
+        confirmPassword: ''
       };
 
     case PASSWORD_MISMATCH:
@@ -109,7 +112,14 @@ export default (state = INITIAL_STATE, action) => {
       };
 
     case AUTHENTICATE_CURRENT_USER:
-      return { ...state, user: action.payload };
+      return {
+        ...state,
+        user: action.payload,
+        error: '',
+        newPassword: '',
+        confirmPassword: '',
+        successMessage: ''
+      };
 
     default:
       return state;

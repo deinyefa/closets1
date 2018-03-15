@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { updatePassword } from '../../actions';
+import { updatePassword, firebasePasswordUpdate } from '../../actions';
 
 import { Input, Button } from '../common';
 
 class NewChangePassword extends Component {
-  onUpdatePassword(text1, text2) {
-    console.log(text1 + ' ' + text2);
-  }
-
   render() {
+    const {
+      newPassword,
+      confirmPassword,
+      error,
+      successMessage,
+      updatePassword,
+      firebasePasswordUpdate
+    } = this.props;
     return (
       <View
         style={{
@@ -25,9 +29,9 @@ class NewChangePassword extends Component {
           label="New"
           placeholder="New password"
           secureTextEntry
-          value={this.props.newPassword}
+          value={newPassword}
           onChangeText={text =>
-            this.props.updatePassword({
+            updatePassword({
               prop: 'newPassword',
               value: text
             })
@@ -38,22 +42,24 @@ class NewChangePassword extends Component {
           label="Confirm"
           placeholder="Confirm password"
           secureTextEntry
-          value={this.props.confirmPassword}
+          value={confirmPassword}
           onChangeText={text =>
-            this.props.updatePassword({
+            updatePassword({
               prop: 'confirmPassword',
               value: text
             })
           }
         />
-        <Text style={styles.errorStyles}>{this.props.error}</Text>
+        <Text style={error ? styles.errorStyles : styles.successStyles}>
+          {error || successMessage}
+        </Text>
         <Button
-          onPress={() => {
-            this.onUpdatePassword(
-              this.props.newPassword,
-              this.props.confirmPassword
-            );
-          }}
+          onPress={() =>
+            firebasePasswordUpdate({
+              newPassword,
+              confirmPassword
+            })
+          }
         >
           RESET MY PASSWORD
         </Button>
@@ -78,6 +84,11 @@ const styles = {
     fontSize: 18,
     alignSelf: 'center',
     color: 'red'
+  },
+  successStyles: {
+    fontSize: 18,
+    alignSelf: 'center',
+    color: 'green'
   }
 };
 
@@ -85,10 +96,12 @@ mapStateToProps = state => {
   return {
     newPassword: state.auth.newPassword,
     confirmPassword: state.auth.confirmPassword,
-    error: state.auth.error
+    error: state.auth.error,
+    successMessage: state.auth.successMessage
   };
 };
 
-export const ChangePassword = connect(mapStateToProps, { updatePassword })(
-  NewChangePassword
-);
+export const ChangePassword = connect(mapStateToProps, {
+  updatePassword,
+  firebasePasswordUpdate
+})(NewChangePassword);

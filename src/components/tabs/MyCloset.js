@@ -56,7 +56,10 @@ class MyCloset extends Component {
             </View>
             <View style={styles.settingsContainer}>
               {/* or follow/following */}
-              <TouchableOpacity style={styles.editProfile}>
+              <TouchableOpacity
+                style={styles.editProfile}
+                onPress={() => this.props.navigation.navigate('EditProfile')}
+              >
                 <Text style={styles.editButton}>Edit Profile</Text>
               </TouchableOpacity>
               <TouchableOpacity
@@ -141,5 +144,3 @@ const styles = {
 };
 
 export { MyCloset };
-
-

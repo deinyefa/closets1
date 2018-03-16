@@ -16,7 +16,8 @@ import {
   PrivacyTerms,
   ReturnPolicy,
   ShippingInfo,
-  About
+  About,
+  EditProfile
 } from '../components/subscreens';
 
 export const Tabs = TabNavigator(
@@ -120,10 +121,20 @@ export const SettingsStack = StackNavigator({
   }
 });
 
+export const EditProfileStack = StackNavigator({
+  EditProfile: {
+    screen: EditProfile,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Edit Profile'
+    })
+  }
+});
+
 export const Root = StackNavigator(
   {
     Tabs: { screen: Tabs },
-    Settings: { screen: SettingsStack }
+    Settings: { screen: SettingsStack },
+    EditProfile: { screen: EditProfileStack }
   },
   {
     mode: 'modal',

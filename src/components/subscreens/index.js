@@ -6,3 +6,4 @@ export * from './ReturnPolicy';
 export * from './ShippingInfo';
 export * from './About';
 export * from './Settings';
+export * from './EditProfile';

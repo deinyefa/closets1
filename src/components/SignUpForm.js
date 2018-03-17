@@ -52,7 +52,10 @@ class SignUpForm extends Component {
         <View style={styles.formStyles}>
           <Text style={styles.appNameStyles}>App Name</Text>
           {this.renderError()}
-          <View>
+          <View style={{ flex: 1 }}>
+            <Input label="full name" placeholder="Adaeze Nwankwolo" />
+            <Input label="username" placeholder="ada" />
+            <Input label="location" placeholder="Alberta, Canada" />
             <Input
               placeholder="email@gmail.com"
               label="email"
@@ -83,11 +86,12 @@ class SignUpForm extends Component {
 
 const styles = {
   formContainerStyles: {
-    flex: 1,
+    // flex: 1,
     alignItems: 'center',
     borderColor: '#EE6A60',
     borderWidth: 3,
-    borderRadius: 2
+    borderRadius: 2,
+    backgroundColor: '#DF91AF'
   },
   registerStyles: {
     alignSelf: 'flex-start',
@@ -95,11 +99,11 @@ const styles = {
     paddingLeft: 10
   },
   formStyles: {
-    paddingTop: 70
+    paddingTop: 20
   },
   appNameStyles: {
     fontSize: 32,
-    marginBottom: 30,
+    marginBottom: 25,
     textAlign: 'center'
   },
   signUpErrorStyle: {

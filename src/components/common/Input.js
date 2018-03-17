@@ -29,18 +29,21 @@ const Input = ({
 const styles = {
   inputStyle: {
     color: '#000',
-    fontSize: 16,
+    fontSize: 13,
     lineHeight: 23,
-    paddingBottom: 10
+    paddingBottom: 1,
+    flex: 2
   },
   labelStyle: {
-    fontSize: 11,
-    flex: 1,
-    marginBottom: -4
+    fontSize: 13,
+    paddingLeft: 20,
+    flex: 1
   },
   containerStyle: {
     height: 40,
-    alignItems: 'flex-start'
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 };
 

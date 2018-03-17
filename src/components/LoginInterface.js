@@ -13,43 +13,45 @@ import { Spinner } from './common';
 
 class LoginInterface extends Component {
   componentWillMount() {
-    // this.props.isUserSignedIn();
+    this.props.isUserSignedIn();
   }
 
   renderCorrectForm() {
     if (this.props.showSignUpForm) {
       return <SignUpForm />;
+    } else if (!this.props.showForgotPasswordScreen) {
+      return <SignInForm />;
     }
-    return <SignInForm />;
+    return <ForgotPasswordForm />;
   }
 
   render() {
-    return (
-      <ImageBackground
-        source={require('../assets/login-background.jpg')}
-        style={styles.backgroundImage}
-        blurRadius={30}
-      >
-        <ForgotPasswordForm />
-        {/* {this.renderCorrectForm()} */}
-      </ImageBackground>
-    );
+    // return (
+    //   <ImageBackground
+    //     source={require('../assets/login-background.jpg')}
+    //     style={styles.backgroundImage}
+    //     blurRadius={30}
+    //   >
+    //     <ForgotPasswordForm />
+    //     {/* {this.renderCorrectForm()} */}
+    //   </ImageBackground>
+    // );
 
-    // if (this.props.user) {
-    //   return <Root />;
-    // } else if (this.props.user === null) {
-    //   return (
-    //     <ImageBackground
-    //       source={require('../assets/login-background.jpg')}
-    //       style={styles.backgroundImage}
-    //       blurRadius={30}
-    //     >
-    //       {this.renderCorrectForm()}
-    //     </ImageBackground>
-    //   );
-    // } else {
-    //   return <Spinner size="large" />;
-    // }
+    if (this.props.user) {
+      return <Root />;
+    } else if (this.props.user === null) {
+      return (
+        <ImageBackground
+          source={require('../assets/login-background.jpg')}
+          style={styles.backgroundImage}
+          blurRadius={30}
+        >
+          {this.renderCorrectForm()}
+        </ImageBackground>
+      );
+    } else {
+      return <Spinner size="large" />;
+    }
   }
 }
 
@@ -67,7 +69,8 @@ const styles = {
 mapStateToProps = state => {
   return {
     showSignUpForm: state.auth.showSignUpForm,
-    user: state.auth.user
+    user: state.auth.user,
+    showForgotPasswordScreen: state.auth.showForgotPasswordScreen
   };
 };
 

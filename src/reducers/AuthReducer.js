@@ -12,7 +12,8 @@ import {
   PASSWORD_MISMATCH,
   UPDATE_PASSWORD,
   LOGOUT,
-  AUTHENTICATE_CURRENT_USER
+  AUTHENTICATE_CURRENT_USER,
+  LOAD_FORGOT_PASSWORD_SCREEN
 } from '../actions/types';
 import firebase from 'firebase';
 
@@ -20,6 +21,7 @@ const INITIAL_STATE = {
   email: '',
   password: '',
   showSignUpForm: true,
+  showForgotPasswordScreen: false,
   error: '',
   loading: false
 };
@@ -36,6 +38,15 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         showSignUpForm: !state.showSignUpForm,
+        email: '',
+        password: '',
+        error: ''
+      };
+
+    case LOAD_FORGOT_PASSWORD_SCREEN:
+      return {
+        ...state,
+        showForgotPasswordScreen: !state.showForgotPasswordScreen,
         email: '',
         password: '',
         error: ''
@@ -92,7 +103,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         newPassword: '',
-        confirmPassword:'',
+        confirmPassword: '',
         successMessage: 'Your password has been successfully updated!',
         error: ''
       };

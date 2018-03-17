@@ -5,17 +5,14 @@ import {
   registerToggle,
   emailChanged,
   passwordChanged,
-  loginUser
+  loginUser,
+  loadForgotPasswordScreen
 } from '../actions';
 import firebase from 'firebase';
 
 import { Button, Input, Spinner } from './common';
 
 class SignInForm extends Component {
-  forgotPassword() {
-    console.log('forgot password');
-  }
-
   onEmailChanged(text) {
     this.props.emailChanged(text);
   }
@@ -74,7 +71,7 @@ class SignInForm extends Component {
           {this.renderSignInButton()}
 
           <TouchableOpacity
-            onPress={this.forgotPassword.bind(this)}
+            onPress={this.props.loadForgotPasswordScreen}
             style={styles.forgotPasswordStyles}
           >
             <Text>Forgot Password?</Text>
@@ -132,5 +129,6 @@ export default connect(mapStateToProps, {
   registerToggle,
   emailChanged,
   passwordChanged,
-  loginUser
+  loginUser,
+  loadForgotPasswordScreen
 })(SignInForm);

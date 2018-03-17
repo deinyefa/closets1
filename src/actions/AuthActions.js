@@ -14,7 +14,8 @@ import {
   PASSWORD_MISMATCH,
   UPDATE_PASSWORD,
   LOGOUT,
-  AUTHENTICATE_CURRENT_USER
+  AUTHENTICATE_CURRENT_USER,
+  LOAD_FORGOT_PASSWORD_SCREEN
 } from './types';
 import firebase from 'firebase';
 
@@ -31,6 +32,12 @@ export const passwordChanged = text => {
     payload: text
   };
 };
+
+export const loadForgotPasswordScreen = () => {
+  return {
+    type: LOAD_FORGOT_PASSWORD_SCREEN
+  }
+}
 
 export const updatePassword = ({ prop, value }) => {
   return {

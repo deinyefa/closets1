@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { loadForgotPasswordScreen } from '../actions';
 
 class ForgotPasswordForm extends Component {
   render() {
@@ -22,7 +24,7 @@ class ForgotPasswordForm extends Component {
         >
           <Text style={styles.textStyles}>OK</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('pressed cancel!')}>
+        <TouchableOpacity onPress={this.props.loadForgotPasswordScreen}>
           <Text style={{ fontSize: 18, marginTop: 15 }}>CANCEL</Text>
         </TouchableOpacity>
       </View>
@@ -70,4 +72,4 @@ const styles = {
   }
 };
 
-export default ForgotPasswordForm;
+export default connect(null, { loadForgotPasswordScreen })(ForgotPasswordForm);

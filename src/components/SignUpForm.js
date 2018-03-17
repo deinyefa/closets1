@@ -10,6 +10,7 @@ import {
 import firebase from 'firebase';
 
 import { Button, Input, Spinner } from './common';
+import CheckBox from 'react-native-checkbox';
 
 class SignUpForm extends Component {
   onButtonPress() {
@@ -70,14 +71,71 @@ class SignUpForm extends Component {
               onChangeText={this.onPasswordChanged.bind(this)}
             />
           </View>
-          <Text style={{ color: 'grey' }}>
+          <Text style={{ color: 'black', marginBottom: 30 }}>
             Password must be at least 6 characters!
           </Text>
 
           {this.renderSignUpButton()}
 
-          <Text>I agree to App Name Terms of Use</Text>
-          <Text>Subscribe to our newsletter</Text>
+          <View style={{ marginTop: 20 }}>
+            <View style={{ flexDirection: 'row' }}>
+              <CheckBox
+                label="I agree to App Name"
+                onChange={checked => {
+                  if (checked) {
+                    console.log(
+                      'if true, state."agreed-to-terms-of-use" = true; save info to database'
+                    );
+                  } else {
+                    console.log(
+                      '-> check this when register button has been clicked! Didn\'t agree, show error: "Must accept terms of use to access this app"'
+                    );
+                  }
+                }}
+                labelStyle={{
+                  color: 'black',
+                  fontSize: 11
+                }}
+                checkboxStyle={{
+                  width: 20,
+                  height: 20
+                }}
+              />
+              <TouchableOpacity
+                onPress={() => console.log('go to terms of use')}
+              >
+                <Text
+                  style={{
+                    fontSize: 11,
+                    alignSelf: 'flex-start',
+                    marginLeft: -7,
+                    marginTop: 4,
+                    textDecorationLine: 'underline'
+                  }}
+                >
+                  Terms of Use
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <CheckBox
+              label="Subscribe to our newsletter"
+              onChange={checked => {
+                if (checked) {
+                  console.log(
+                    'if true, state."subscribed" = true; collect email and add to mailing list'
+                  );
+                }
+              }}
+              labelStyle={{
+                color: 'black',
+                fontSize: 11
+              }}
+              checkboxStyle={{
+                width: 20,
+                height: 20
+              }}
+            />
+          </View>
         </View>
       </View>
     );
@@ -86,16 +144,15 @@ class SignUpForm extends Component {
 
 const styles = {
   formContainerStyles: {
-    // flex: 1,
     alignItems: 'center',
     borderColor: '#EE6A60',
     borderWidth: 3,
     borderRadius: 2,
-    backgroundColor: '#DF91AF'
+    paddingBottom: 30
   },
   registerStyles: {
     alignSelf: 'flex-start',
-    paddingTop: 15,
+    paddingTop: 10,
     paddingLeft: 10
   },
   formStyles: {

@@ -15,7 +15,9 @@ import {
   UPDATE_PASSWORD,
   LOGOUT,
   AUTHENTICATE_CURRENT_USER,
-  LOAD_FORGOT_PASSWORD_SCREEN
+  LOAD_FORGOT_PASSWORD_SCREEN,
+  SEND_PASSWORD_RESET_EMAIL,
+  SEND_PASSWORD_RESET_EMAIL_FAIL
 } from './types';
 import firebase from 'firebase';
 
@@ -36,8 +38,23 @@ export const passwordChanged = text => {
 export const loadForgotPasswordScreen = () => {
   return {
     type: LOAD_FORGOT_PASSWORD_SCREEN
-  }
-}
+  };
+};
+
+export const firbaseSendPasswordResetEmail = email => {
+  return dispatch => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => dispatch({ type: SEND_PASSWORD_RESET_EMAIL }))
+      .catch(error =>
+        dispatch({
+          type: SEND_PASSWORD_RESET_EMAIL_FAIL,
+          payload: error.message
+        })
+      );
+  };
+};
 
 export const updatePassword = ({ prop, value }) => {
   return {

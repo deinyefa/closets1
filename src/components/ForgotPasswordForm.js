@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import { loadForgotPasswordScreen } from '../actions';
+import {
+  loadForgotPasswordScreen,
+  emailChanged,
+  firbaseSendPasswordResetEmail
+} from '../actions';
 
 class ForgotPasswordForm extends Component {
   render() {
+    const {
+      email,
+      statusMessage,
+      error,
+      loadForgotPasswordScreen,
+      emailChanged,
+      firbaseSendPasswordResetEmail
+    } = this.props;
     return (
       <View style={styles.formContainerStyles}>
+        <Text style={error ? styles.errorStyles : styles.statusStyles}>
+          {error || statusMessage}
+        </Text>
+
         <Text style={styles.appNameStyles}>App Name</Text>
         <View style={styles.titleContainerStyles}>
           <Text style={{ fontSize: 20 }}>FORGOT PASSWORD</Text>
@@ -14,17 +30,24 @@ class ForgotPasswordForm extends Component {
             Confirm your identity to reset your password
           </Text>
         </View>
+
         <View style={styles.inputContainerStyles}>
-          <TextInput placeholder="please enter your email address" />
+          <TextInput
+            placeholder="please enter your email address"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onChangeText={email => emailChanged(email)}
+            value={email}
+          />
         </View>
 
         <TouchableOpacity
           style={styles.buttonStyles}
-          onPress={() => console.log('pressed ok!')}
+          onPress={() => firbaseSendPasswordResetEmail(email)}
         >
           <Text style={styles.textStyles}>OK</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={this.props.loadForgotPasswordScreen}>
+        <TouchableOpacity onPress={loadForgotPasswordScreen}>
           <Text style={{ fontSize: 18, marginTop: 15 }}>CANCEL</Text>
         </TouchableOpacity>
       </View>
@@ -43,7 +66,7 @@ const styles = {
   },
   appNameStyles: {
     fontSize: 32,
-    marginTop: 70,
+    marginTop: 40,
     textAlign: 'center'
   },
   titleContainerStyles: {
@@ -65,6 +88,16 @@ const styles = {
     paddingVertical: 7,
     paddingHorizontal: 70
   },
+  errorStyles: {
+    fontSize: 16,
+    color: 'red',
+    paddingTop: 10
+  },
+  statusStyles: {
+    fontSize: 16,
+    color: 'green',
+    paddingTop: 10
+  },
   buttonStyles: {
     borderRadius: 5,
     borderWidth: 1,
@@ -72,4 +105,16 @@ const styles = {
   }
 };
 
-export default connect(null, { loadForgotPasswordScreen })(ForgotPasswordForm);
+mapStateToProps = state => {
+  return {
+    email: state.auth.email,
+    statusMessage: state.auth.statusMessage,
+    error: state.auth.error
+  };
+};
+
+export default connect(mapStateToProps, {
+  loadForgotPasswordScreen,
+  emailChanged,
+  firbaseSendPasswordResetEmail
+})(ForgotPasswordForm);

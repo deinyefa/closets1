@@ -13,7 +13,9 @@ import {
   UPDATE_PASSWORD,
   LOGOUT,
   AUTHENTICATE_CURRENT_USER,
-  LOAD_FORGOT_PASSWORD_SCREEN
+  LOAD_FORGOT_PASSWORD_SCREEN,
+  SEND_PASSWORD_RESET_EMAIL,
+  SEND_PASSWORD_RESET_EMAIL_FAIL
 } from '../actions/types';
 import firebase from 'firebase';
 
@@ -29,7 +31,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EMAIL_CHANGED:
-      return { ...state, email: action.payload };
+      return { ...state, email: action.payload, error: '', statusMessage: '' };
 
     case PASSWORD_CHANGED:
       return { ...state, password: action.payload };
@@ -51,6 +53,16 @@ export default (state = INITIAL_STATE, action) => {
         password: '',
         error: ''
       };
+
+    case SEND_PASSWORD_RESET_EMAIL:
+      return {
+        ...state,
+        statusMessage:
+          'A link to reset your password has been sent to the email provided'
+      };
+
+    case SEND_PASSWORD_RESET_EMAIL_FAIL:
+      return { ...state, email: '', error: action.payload };
 
     case LOGIN_USER:
       return { ...state, loading: true, error: '' };

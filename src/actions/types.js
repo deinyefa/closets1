@@ -14,3 +14,5 @@ export const SIGNUP_USER_FAIL = 'sign_up_user_fail';
 export const LOGOUT = 'user_logout';
 export const AUTHENTICATE_CURRENT_USER = 'authenticate_current_user';
 export const LOAD_FORGOT_PASSWORD_SCREEN = 'load_forgot_password_screen';
+export const SEND_PASSWORD_RESET_EMAIL = 'send_password_reset_email';
+export const SEND_PASSWORD_RESET_EMAIL_FAIL = 'send_password_reset_email_fail';

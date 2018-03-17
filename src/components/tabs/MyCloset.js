@@ -33,24 +33,20 @@ class MyCloset extends Component {
             <View style={styles.businessContainer}>
               {/* will add icons to these with <Image /> */}
               <TouchableOpacity>
-                <Icon
-                  name="receipt"
-                  type="material-community"
-                  color="#F61200"
-                />
+                <Icon name="receipt" type="material-community" color="tomato" />
                 <Text>Orders</Text>
               </TouchableOpacity>
               <TouchableOpacity>
                 <Icon
                   name="tags"
                   type="font-awesome"
-                  color="#F61200"
+                  color="tomato"
                   size={26}
                 />
                 <Text>Offers</Text>
               </TouchableOpacity>
               <TouchableOpacity>
-                <Icon name="chat" type="entypo" color="#F61200" />
+                <Icon name="chat" type="entypo" color="tomato" />
                 <Text>Chat</Text>
               </TouchableOpacity>
             </View>
@@ -66,12 +62,7 @@ class MyCloset extends Component {
                 style={styles.settingsButton}
                 onPress={() => this.props.navigation.navigate('Settings')}
               >
-                <Icon
-                  name="settings"
-                  type="feather"
-                  size={26}
-                  color="#F61200"
-                />
+                <Icon name="settings" type="feather" size={26} color="tomato" />
               </TouchableOpacity>
             </View>
           </View>
@@ -130,7 +121,8 @@ const styles = {
     alignSelf: 'center',
     justifyContent: 'space-around',
     borderWidth: 1,
-    borderColor: '#d6d7da'
+    borderColor: 'tomato',
+    borderRadius: 5
   },
   editButton: {
     textAlign: 'center',

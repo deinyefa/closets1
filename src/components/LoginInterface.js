@@ -7,6 +7,7 @@ import { isUserSignedIn } from '../actions';
 
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import ForgotPasswordForm from './ForgotPasswordForm';
 import { Root } from '../config/router';
 import { Spinner } from './common';
 
@@ -29,7 +30,8 @@ class LoginInterface extends Component {
         style={styles.backgroundImage}
         blurRadius={30}
       >
-        {this.renderCorrectForm()}
+        <ForgotPasswordForm />
+        {/* {this.renderCorrectForm()} */}
       </ImageBackground>
     );
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import {
   registerToggle,
@@ -12,9 +12,8 @@ import firebase from 'firebase';
 import { Button, Input, Spinner } from './common';
 
 class SignInForm extends Component {
-
   forgotPassword() {
-    return Alert.alert('user forgot password');
+    console.log('forgot password');
   }
 
   onEmailChanged(text) {

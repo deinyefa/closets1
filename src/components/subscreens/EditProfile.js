@@ -1,20 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Button, Image, TextInput } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-// import RadioForm, {
-//   RadioButton,
-//   RadioButtonInput,
-//   RadioButtonLabel
-// } from 'react-native-simple-radio-button';
 import { SegmentedControls } from 'react-native-radio-buttons';
 
 import { Input } from '../common';
-
-// let radio_props = [
-//   { label: 'Female', value: 'female' },
-//   { label: 'Male', value: 'male' },
-//   { label: 'Prefer not to say', value: 'n/s' }
-// ];
 
 class EditProfile extends Component {
   static navigationOptions = {

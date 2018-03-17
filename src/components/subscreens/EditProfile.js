@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, View, Button, Image, TextInput } from 'react-native';
 import { List, ListItem } from 'react-native-elements';
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel
-} from 'react-native-simple-radio-button';
+// import RadioForm, {
+//   RadioButton,
+//   RadioButtonInput,
+//   RadioButtonLabel
+// } from 'react-native-simple-radio-button';
+import { SegmentedControls } from 'react-native-radio-buttons';
 
 import { Input } from '../common';
 
-let radio_props = [
-  { label: 'Female', value: 'female' },
-  { label: 'Male', value: 'male' },
-  { label: 'Prefer not to say', value: 'n/s' }
-];
+// let radio_props = [
+//   { label: 'Female', value: 'female' },
+//   { label: 'Male', value: 'male' },
+//   { label: 'Prefer not to say', value: 'n/s' }
+// ];
 
 class EditProfile extends Component {
   static navigationOptions = {
@@ -34,6 +35,7 @@ class EditProfile extends Component {
   };
 
   render() {
+    const genderOptions = ['Female', 'Male', 'Prefer not to say'];
     return (
       <View style={{ flex: 1 }}>
         <View style={styles.profilePictureContainerStyles}>
@@ -77,26 +79,23 @@ class EditProfile extends Component {
             <Text style={styles.labelStyles}>Email</Text>
             <TextInput style={styles.inputStyles} />
           </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              paddingTop: 20
-            }}
-          >
-            <Text>Gender</Text>
-            <RadioForm
-              accessible={true}
-              radio_props={radio_props}
-              initial={0}
-              formHorizontal={false}
-              labelHorizontal={true}
-              buttonColor={'#E35D91'}
-              animation={true}
-              onPress={value => console.log(value + ' has been selected')}
-              style={{ borderLeftWidth: 2, borderLeftColor: '#000' }}
-              buttonWrapStyle={{ marginLeft: 20 }}
-            />
-          </View>
+        </View>
+        <View style={styles.informationStyles}>
+          <Text style={{ color: 'gray', fontSize: 11, marginBottom: 20 }}>
+            Gender
+          </Text>
+          <Text style={{ fontSize: 18, marginBottom: 20, alignSelf: 'center' }}>
+            You've selected ____
+          </Text>
+          <SegmentedControls
+            options={genderOptions}
+            onSelection={selectedOption =>
+              console.log(`selected ${selectedOption}`)
+            }
+            tint={'#EE6A60'}
+            selectedTint={'white'}
+            backTint={'#E6E6E6'}
+          />
         </View>
       </View>
     );

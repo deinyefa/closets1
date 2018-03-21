@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 class MyCloset extends Component {
@@ -67,18 +67,25 @@ class MyCloset extends Component {
             </View>
           </View>
         </View>
-        <Text>Closet STUFF</Text>
+        <View>
+          <ScrollView style={styles.itemsListContainerStyles}>
+            <Text>Closet STUFF</Text>
+          </ScrollView>
+        </View>
       </View>
     );
   }
 }
 
 const styles = {
-  closetContainer: {},
+  itemsListContainerStyles: {
+    paddingLeft: 10,
+    paddingRight: 10
+  },
   headerContainer: {
     flexDirection: 'row',
-    paddingTop: 40,
-    paddingBottom: 20,
+    paddingTop: 50,
+    paddingBottom: 60,
     paddingLeft: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#d6d7da',
@@ -90,7 +97,8 @@ const styles = {
   profilePictureStyles: {
     borderRadius: 50,
     width: 100,
-    height: 100
+    height: 100,
+    marginBottom: 10
   },
   infoContainer: {
     flex: 3,

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-class ItemListing extends Component {
+class ItemDetails extends Component {
   static navigationOptions = {
     headerTitle: <ItemListing />,
     headerLeft: (
@@ -64,11 +64,11 @@ class ItemListing extends Component {
             <Text>[listing description]</Text>
             <Text>[sale price][value] | Size: [#]</Text>
           </View>
-          <View>
-            <View>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ alignContent: 'flex-start' }}>
               <Text>[sale price][value]</Text>
             </View>
-            <View>
+            <View style={{ alignContent: 'flex-end' }}>
               <TouchableOpacity>
                 <Text>OFFERS : ADD TO BAG</Text>
               </TouchableOpacity>
@@ -95,4 +95,4 @@ const styles = {
   }
 };
 
-export default ItemListing;
+export default ItemDetails;
